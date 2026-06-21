@@ -1,16 +1,11 @@
+
 #!/usr/bin/env python3
 """
 rag_engine_v4.py — MAXIMUM ACCURACY hybrid retrieval engine.
-
-MAJOR IMPROVEMENTS:
-  1. Query decomposition: generic vs specific term weighting
-  2. Compound signal boosting (onset + symptom, gender + inheritance)
-  3. Stronger alias matching with disease-specific keyword injection
-  4. Direct database scan for critical signals
-  5. Multi-layer fallback matching
 """
 
 import os
+import sys
 import pickle
 import numpy as np
 import faiss
@@ -22,15 +17,20 @@ from concurrent.futures import ThreadPoolExecutor
 import multiprocessing
 from dotenv import load_dotenv
 
-# Load environment variables
+# ── Load environment variables ─────────────────────────────────────────────
 load_dotenv()
 
-# Set HF token from environment (NOT hardcoded!)
+# ── Set HF token from environment ─────────────────────────────────────────
 hf_token = os.environ.get("HF_TOKEN", "")
 if hf_token:
     os.environ["HF_TOKEN"] = hf_token
 
-# ── Gemini SDK (NEW: google.genai) ────────────────────────────────────────
+# ── Define BASE_DIR and PATHS (BEFORE they're used) ──────────────────────
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FAISS_INDEX_PATH = os.path.join(BASE_DIR, "data", "faiss_index_medcpt_v4.bin")
+FAISS_META_PATH = os.path.join(BASE_DIR, "data", "faiss_meta_medcpt_v4.pkl")
+
+# ── Gemini SDK ─────────────────────────────────────────────────────────────
 try:
     from google import genai
     from google.genai import types
@@ -376,8 +376,8 @@ _embedder = None
 _tokenizer = None
 _cross_encoder = None
 
-FAISS_INDEX_PATH = "faiss_index_medcpt_v4.bin"
-FAISS_META_PATH = "faiss_meta_medcpt_v4.pkl"
+FAISS_INDEX_PATH = "data/faiss_index_medcpt_v4.bin"
+FAISS_META_PATH = "data/faiss_meta_medcpt_v4.pkl"
 
 
 def _get_device():
@@ -501,13 +501,57 @@ def build_faiss_index(db: List[Dict], use_ivf: bool = True):
 
 
 def load_faiss_index() -> Tuple:
-    if not os.path.exists(FAISS_INDEX_PATH) or not os.path.exists(FAISS_META_PATH):
-        raise FileNotFoundError(f"Indexes not found. Expected: {FAISS_INDEX_PATH}, {FAISS_META_PATH}")
-    index = faiss.read_index(FAISS_INDEX_PATH)
-    with open(FAISS_META_PATH, "rb") as f:
+    """Load FAISS index with fallback paths if not found."""
+    
+    # Try multiple possible paths
+    possible_paths = [
+        FAISS_INDEX_PATH,  # From BASE_DIR
+        "data/faiss_index_medcpt_v4.bin",
+        "faiss_index_medcpt_v4.bin",
+        "../data/faiss_index_medcpt_v4.bin",
+        "Kimi_hackathon/data/faiss_index_medcpt_v4.bin",
+    ]
+    
+    meta_paths = [
+        FAISS_META_PATH,
+        "data/faiss_meta_medcpt_v4.pkl",
+        "faiss_meta_medcpt_v4.pkl",
+        "../data/faiss_meta_medcpt_v4.pkl",
+        "Kimi_hackathon/data/faiss_meta_medcpt_v4.pkl",
+    ]
+    
+    # Find existing index path
+    index_path = None
+    for path in possible_paths:
+        if os.path.exists(path):
+            index_path = path
+            break
+    
+    # Find existing meta path
+    meta_path = None
+    for path in meta_paths:
+        if os.path.exists(path):
+            meta_path = path
+            break
+    
+    if index_path is None or meta_path is None:
+        raise FileNotFoundError(
+            f"Indexes not found. Tried:\n"
+            f"  Index paths: {possible_paths}\n"
+            f"  Meta paths: {meta_paths}\n"
+            f"Current working directory: {os.getcwd()}\n"
+            f"BASE_DIR: {BASE_DIR}\n"
+            f"FAISS_INDEX_PATH: {FAISS_INDEX_PATH}"
+        )
+    
+    print(f"✅ Found index at: {index_path}")
+    print(f"✅ Found meta at: {meta_path}")
+    
+    index = faiss.read_index(index_path)
+    with open(meta_path, "rb") as f:
         meta = pickle.load(f)
+    
     return index, meta["db"], meta["bm25"]
-
 
 def analyze_medical_image(image_bytes: bytes, image_type: str = "image/jpeg") -> Dict:
     """

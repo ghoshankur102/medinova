@@ -4,13 +4,25 @@ app.py — MediNova Streamlit App v4
 Rare disease diagnosis support with hybrid RAG + medical image analysis.
 """
 
+#!/usr/bin/env python3
+"""
+app.py — MediNova Streamlit App v4
+Rare disease diagnosis support with hybrid RAG + medical image analysis.
+"""
+
 import os
+import sys
 import io
 import json
 import time
 import pickle
 import streamlit as st
 from PIL import Image
+
+# ── Add src folder to Python path ─────────────────────────────────────────
+sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+
+# ── Page config ───────────────────────────────────────────────────────────────
 
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -96,6 +108,8 @@ st.markdown("""
 
 
 # ── Index loading (cached) ─────────────────────────────────────────────────
+# It might have something like:
+# ── Index loading (cached) ─────────────────────────────────────────────────
 @st.cache_resource(show_spinner=False)
 def load_index():
     from rag_engine_v4 import load_faiss_index
@@ -103,9 +117,9 @@ def load_index():
 
 
 def check_index_exists() -> bool:
-    return (os.path.exists("faiss_index_medcpt_v4.bin") and
-            os.path.exists("faiss_meta_medcpt_v4.pkl"))
-
+    # ✅ Check in data/ folder
+    return (os.path.exists("data/faiss_index_medcpt_v4.bin") and
+            os.path.exists("data/faiss_meta_medcpt_v4.pkl"))
 
 # ── Rendering helpers ─────────────────────────────────────────────────────
 def render_disease_card(disease: dict, rank: int):
@@ -193,7 +207,7 @@ with st.sidebar:
         st.success("✅ Index ready")
         try:
             import os
-            size_mb = os.path.getsize("faiss_index_medcpt_v4.bin") / 1e6
+            size_mb = os.path.getsize("data/faiss_index_medcpt_v4.bin") / 1e6
             st.caption(f"Index size: {size_mb:.1f} MB")
         except Exception:
             pass
