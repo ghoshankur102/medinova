@@ -27,3 +27,6 @@ Kimi_hackathon/nih_chest_xray/images/
 # OS
 .DS_Store
 Thumbs.db
+Kimi_hackathon/data/*.json
+Kimi_hackathon/data/*.pkl
+Kimi_hackathon/data/*.bin
