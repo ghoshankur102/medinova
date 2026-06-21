@@ -20,12 +20,24 @@ import json
 from typing import List, Dict, Optional, Tuple
 from concurrent.futures import ThreadPoolExecutor
 import multiprocessing
+from dotenv import load_dotenv
 
-# Add these for Gemini
+# Load environment variables
+load_dotenv()
+
+# Set HF token from environment (NOT hardcoded!)
+hf_token = os.environ.get("HF_TOKEN", "")
+if hf_token:
+    os.environ["HF_TOKEN"] = hf_token
+
+# ── Gemini SDK (NEW: google.genai) ────────────────────────────────────────
 try:
-    import google.generativeai as genai
+    from google import genai
+    from google.genai import types
+    GENAI_AVAILABLE = True
 except ImportError:
-    print("⚠️ google-generativeai not installed. Run: pip install google-generativeai")
+    print("⚠️ google-genai not installed. Run: pip install google-genai")
+    GENAI_AVAILABLE = False
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # QUERY EXPANSION (COMPREHENSIVE)
@@ -64,7 +76,6 @@ QUERY_EXPANSIONS = {
     "loss of purposeful hand use": "loss of hand skills regression hand function loss",
     "repetitive hand movements": "hand-wringing stereotypies repetitive hand movements",
     "hand wringing": "hand-wringing stereotypies repetitive hand movements",
-    "hand wringing": "hand wringing stereotypies repetitive hand",
     "fair skin": "hypopigmentation light skin blonde hair fair skin",
     "light hair": "blonde hair hypopigmentation fair hair",
     "elevated creatine kinase": "CK elevated creatine kinase high CK level",
@@ -500,15 +511,17 @@ def load_faiss_index() -> Tuple:
 
 def analyze_medical_image(image_bytes: bytes, image_type: str = "image/jpeg") -> Dict:
     """
-    Analyze medical image using the new Google GenAI SDK (Gemini 2.5 Flash).
+    Analyze medical image using the NEW Google GenAI SDK (Gemini 2.5 Flash).
+    Uses google.genai (NOT google.generativeai - which is deprecated).
     """
     import base64
-    from google import genai
-    from google.genai import types
-    from PIL import Image
-    import io
     import json
     import re
+
+    if not GENAI_AVAILABLE:
+        raise ImportError(
+            "google-genai not installed. Please run: pip install google-genai"
+        )
 
     # Get API key from environment
     api_key = os.environ.get("GOOGLE_API_KEY", "")
@@ -519,14 +532,12 @@ def analyze_medical_image(image_bytes: bytes, image_type: str = "image/jpeg") ->
     client = genai.Client(api_key=api_key)
 
     # 2. Prepare the image part
-    # The new SDK accepts base64 encoded image data directly.
-    image_data = base64.b64encode(image_bytes).decode("utf-8")
     image_part = types.Part.from_bytes(
         data=image_bytes,
         mime_type=image_type,
     )
 
-    # 3. Build the prompt (same as before)
+    # 3. Build the prompt
     prompt = """You are a medical image analysis assistant helping with rare disease diagnosis support.
 
 IMPORTANT: This is for educational/research support only. Always clarify that a radiologist/physician must review any images clinically.
@@ -550,7 +561,7 @@ Return ONLY valid JSON, no markdown fences, no additional text."""
         contents=[prompt, image_part],
     )
 
-    # 5. Parse the response (same as before)
+    # 5. Parse the response
     text = response.text.strip()
     text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text, flags=re.MULTILINE).strip()
 
@@ -573,6 +584,7 @@ Return ONLY valid JSON, no markdown fences, no additional text."""
             }
     
     return result
+
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # CRITICAL FIX: Direct database scan for disease-specific keywords
@@ -948,10 +960,13 @@ def retrieve_diseases(
             # Direct matches keep their high scores
             score = info["dense_score"]
         elif fusion_method == "rrf":
-            score = (1.0 / (rrf_k + info["dense_rank"]) if info["dense_rank"] else 0) +                     (1.0 / (rrf_k + info["sparse_rank"]) if info["sparse_rank"] else 0)
+            score = (1.0 / (rrf_k + info["dense_rank"]) if info["dense_rank"] else 0) + \
+                    (1.0 / (rrf_k + info["sparse_rank"]) if info["sparse_rank"] else 0)
         elif fusion_method == "hybrid":
-            w_score = alpha * (info["dense_score"] / (max_dense + 1e-6)) +                       (1 - alpha) * (info["sparse_score"] / (max_sparse + 1e-6))
-            rrf_score = (1.0 / (rrf_k + info["dense_rank"]) if info["dense_rank"] else 0) +                         (1.0 / (rrf_k + info["sparse_rank"]) if info["sparse_rank"] else 0)
+            w_score = alpha * (info["dense_score"] / (max_dense + 1e-6)) + \
+                      (1 - alpha) * (info["sparse_score"] / (max_sparse + 1e-6))
+            rrf_score = (1.0 / (rrf_k + info["dense_rank"]) if info["dense_rank"] else 0) + \
+                        (1.0 / (rrf_k + info["sparse_rank"]) if info["sparse_rank"] else 0)
             score = 0.6 * w_score + 0.4 * rrf_score
         else:
             dense_norm = info["dense_score"] / (max_dense + 1e-6) if info["dense_score"] > 0 else 0
