@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-06-19T19:48:36.921225",
+  "total_diseases": 4335,
+  "source": "Orphanet en_product1.xml + en_product4.xml",
+  "version": "3.0",
+  "features": [
+    "hpo_ids_in_text",
+    "symptom_synonyms",
+    "frequency_ranking",
+    "distinguishing_markers",
+    "name_alias_injection",
+    "gender_context",
+    "reduced_name_noise"
+  ]
+}

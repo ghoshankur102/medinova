@@ -1,0 +1,904 @@
+{
+  "metadata": {
+    "dataset_version": "2.0",
+    "generated": "2026-06-21T10:38:11.611674",
+    "total_queries": 110,
+    "categories": [
+      "gender_specific",
+      "onset_terms",
+      "biochemical_markers",
+      "inheritance_terms",
+      "classic_symptoms",
+      "vague_single_symptom",
+      "name_aliases",
+      "gender_filtering"
+    ],
+    "difficulty_distribution": {
+      "medium": 70,
+      "hard": 22,
+      "easy": 18
+    }
+  },
+  "queries": [
+    {
+      "query": "learning difficulties neurofibromas axillary freckling macrocephaly bone lesions",
+      "expected_disease": "Neurofibromatosis type 1",
+      "orpha_code": "636",
+      "category": "name_aliases",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "happy puppet paroxysmal laughter",
+      "expected_disease": "Angelman syndrome",
+      "orpha_code": "72",
+      "category": "classic_symptoms",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "absent speech",
+      "expected_disease": "Angelman syndrome",
+      "orpha_code": "72",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "cardiomyopathy GL3 accumulation neuropathic pain globotriaosylceramide alpha-galactosidase",
+      "expected_disease": "Fabry disease",
+      "orpha_code": "324",
+      "category": "name_aliases",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "sleep disturbance paroxysmal laughter absent speech happy demeanor excitability",
+      "expected_disease": "Angelman syndrome",
+      "orpha_code": "72",
+      "category": "classic_symptoms",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "adult onset dementia",
+      "expected_disease": "Huntington disease",
+      "orpha_code": "399",
+      "category": "onset_terms",
+      "query_type": "onset",
+      "difficulty": "medium"
+    },
+    {
+      "query": "drooping eyelids",
+      "expected_disease": "Myasthenia gravis",
+      "orpha_code": "589",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "both sexes young adult liver disease",
+      "expected_disease": "Wilson disease",
+      "orpha_code": "905",
+      "category": "classic_symptoms",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "autosomal dominant aortic root dilation",
+      "expected_disease": "Marfan syndrome",
+      "orpha_code": "558",
+      "category": "inheritance_terms",
+      "query_type": "inheritance",
+      "difficulty": "medium"
+    },
+    {
+      "query": "renal angiomyolipoma, hamartomas, subependymal nodules, seizures, Shagreen patches",
+      "expected_disease": "Tuberous sclerosis",
+      "orpha_code": "805",
+      "category": "name_aliases",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "learning difficulties short stature cubitus valgus low hairline bicuspid aortic valve",
+      "expected_disease": "Turner syndrome",
+      "orpha_code": "881",
+      "category": "gender_specific",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "seizures",
+      "expected_disease": "Angelman syndrome",
+      "orpha_code": "72",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "boys scoliosis elevated creatine kinase",
+      "expected_disease": "Duchenne muscular dystrophy",
+      "orpha_code": "98896",
+      "category": "classic_symptoms",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "eating too much hypogonadism",
+      "expected_disease": "Prader-Willi syndrome",
+      "orpha_code": "739",
+      "category": "gender_specific",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "childhood onset scoliosis",
+      "expected_disease": "Duchenne muscular dystrophy",
+      "orpha_code": "98896",
+      "category": "onset_terms",
+      "query_type": "onset",
+      "difficulty": "medium"
+    },
+    {
+      "query": "females neonatal bicuspid aortic valve",
+      "expected_disease": "Turner syndrome",
+      "orpha_code": "881",
+      "category": "gender_specific",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "X-linked social anxiety macroorchidism",
+      "expected_disease": "Fragile X syndrome",
+      "orpha_code": "908",
+      "category": "name_aliases",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "hepatolenticular anxiety copper accumulation",
+      "expected_disease": "Wilson disease",
+      "orpha_code": "905",
+      "category": "classic_symptoms",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "X-linked recessive calf pseudohypertrophy",
+      "expected_disease": "Duchenne muscular dystrophy",
+      "orpha_code": "98896",
+      "category": "inheritance_terms",
+      "query_type": "inheritance",
+      "difficulty": "medium"
+    },
+    {
+      "query": "big ears prominent jaw",
+      "expected_disease": "Fragile X syndrome",
+      "orpha_code": "908",
+      "category": "name_aliases",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "glycogen storage type 2 GAA deficiency exercise intolerance",
+      "expected_disease": "Pompe disease",
+      "orpha_code": "2075",
+      "category": "name_aliases",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "hepatomegaly, bone pain, Erlenmeyer flask deformity, GBA deficiency, bone crisis",
+      "expected_disease": "Gaucher disease",
+      "orpha_code": "355",
+      "category": "name_aliases",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "female only cubitus valgus",
+      "expected_disease": "Turner syndrome",
+      "orpha_code": "881",
+      "category": "gender_filtering",
+      "query_type": "gender_filter",
+      "difficulty": "medium"
+    },
+    {
+      "query": "girls 6-18 months stereotypies",
+      "expected_disease": "Rett syndrome",
+      "orpha_code": "778",
+      "category": "gender_specific",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "monosomy X low hairline primary amenorrhea",
+      "expected_disease": "Turner syndrome",
+      "orpha_code": "881",
+      "category": "gender_specific",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "aortic dissection ectopia lentis arachnodactyly",
+      "expected_disease": "Marfan syndrome",
+      "orpha_code": "558",
+      "category": "biochemical_markers",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "MECP2 regression stereotypies",
+      "expected_disease": "Rett syndrome",
+      "orpha_code": "778",
+      "category": "gender_specific",
+      "query_type": "symptom_based",
+      "difficulty": "hard"
+    },
+    {
+      "query": "obesity, small hands and feet, hyperphagia, infantile hypotonia, sleep apnea",
+      "expected_disease": "Prader-Willi syndrome",
+      "orpha_code": "739",
+      "category": "gender_specific",
+      "query_type": "onset_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "skill loss hand wringing",
+      "expected_disease": "Rett syndrome",
+      "orpha_code": "778",
+      "category": "gender_specific",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "sweat chloride bronchiectasis salty sweat",
+      "expected_disease": "Cystic fibrosis",
+      "orpha_code": "586",
+      "category": "biochemical_markers",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "droopy eyes dysphagia",
+      "expected_disease": "Myasthenia gravis",
+      "orpha_code": "589",
+      "category": "classic_symptoms",
+      "query_type": "colloquial",
+      "difficulty": "hard"
+    },
+    {
+      "query": "MECP2 hand wringing microcephaly seizures loss of purposeful hand use",
+      "expected_disease": "Rett syndrome",
+      "orpha_code": "778",
+      "category": "gender_specific",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "chorea",
+      "expected_disease": "Huntington disease",
+      "orpha_code": "399",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "glycogen storage",
+      "expected_disease": "Pompe disease",
+      "orpha_code": "2075",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "copper poisoning dystonia",
+      "expected_disease": "Wilson disease",
+      "orpha_code": "905",
+      "category": "classic_symptoms",
+      "query_type": "biochemical",
+      "difficulty": "hard"
+    },
+    {
+      "query": "no periods bicuspid aortic valve",
+      "expected_disease": "Turner syndrome",
+      "orpha_code": "881",
+      "category": "gender_specific",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "elfin facies distinctive facial features cognitive impairment hypercalcemia strabismus",
+      "expected_disease": "Williams syndrome",
+      "orpha_code": "868",
+      "category": "name_aliases",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "both sexes childhood hepatomegaly",
+      "expected_disease": "Gaucher disease",
+      "orpha_code": "355",
+      "category": "name_aliases",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "GBA glucocerebrosidase glucosylceramide",
+      "expected_disease": "Gaucher disease",
+      "orpha_code": "355",
+      "category": "name_aliases",
+      "query_type": "biochemical",
+      "difficulty": "hard"
+    },
+    {
+      "query": "CAG repeat",
+      "expected_disease": "Huntington disease",
+      "orpha_code": "399",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "small testicles osteoporosis",
+      "expected_disease": "Klinefelter syndrome",
+      "orpha_code": "10",
+      "category": "gender_specific",
+      "query_type": "colloquial",
+      "difficulty": "hard"
+    },
+    {
+      "query": "both sexes 30-50 years personality changes",
+      "expected_disease": "Huntington disease",
+      "orpha_code": "399",
+      "category": "biochemical_markers",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "both sexes childhood Shagreen patches",
+      "expected_disease": "Tuberous sclerosis",
+      "orpha_code": "805",
+      "category": "name_aliases",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "big calves Gowers sign",
+      "expected_disease": "Duchenne muscular dystrophy",
+      "orpha_code": "98896",
+      "category": "classic_symptoms",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "dysphagia, double vision, drooping eyelids, fatigable weakness, difficulty chewing",
+      "expected_disease": "Myasthenia gravis",
+      "orpha_code": "589",
+      "category": "classic_symptoms",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "7q11.23 friendly personality distinctive facial features",
+      "expected_disease": "Williams syndrome",
+      "orpha_code": "868",
+      "category": "name_aliases",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "children adolescent cafe au lait spots",
+      "expected_disease": "Neurofibromatosis type 1",
+      "orpha_code": "636",
+      "category": "name_aliases",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "anxiety, cirrhosis, liver disease, psychiatric symptoms, neurological symptoms",
+      "expected_disease": "Wilson disease",
+      "orpha_code": "905",
+      "category": "classic_symptoms",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "neonatal onset behavioral problems",
+      "expected_disease": "Prader-Willi syndrome",
+      "orpha_code": "739",
+      "category": "onset_terms",
+      "query_type": "onset",
+      "difficulty": "medium"
+    },
+    {
+      "query": "boys 3-5 years falls",
+      "expected_disease": "Duchenne muscular dystrophy",
+      "orpha_code": "98896",
+      "category": "classic_symptoms",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "young women adult onset drooping eyelids",
+      "expected_disease": "Myasthenia gravis",
+      "orpha_code": "589",
+      "category": "classic_symptoms",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "both sexes neonatal onset phenylalanine",
+      "expected_disease": "Phenylketonuria",
+      "orpha_code": "716",
+      "category": "biochemical_markers",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "autism features social anxiety attention deficit speech delay large ears",
+      "expected_disease": "Fragile X syndrome",
+      "orpha_code": "908",
+      "category": "name_aliases",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "kidney disease angiokeratoma",
+      "expected_disease": "Fabry disease",
+      "orpha_code": "324",
+      "category": "name_aliases",
+      "query_type": "colloquial",
+      "difficulty": "hard"
+    },
+    {
+      "query": "poor wound healing, atarophic scarring, chronic pain, fragile skin, dental issues",
+      "expected_disease": "Ehlers-Danlos syndrome",
+      "orpha_code": "98261",
+      "category": "name_aliases",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "Klinefelter small testes tall stature",
+      "expected_disease": "Klinefelter syndrome",
+      "orpha_code": "10",
+      "category": "gender_specific",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "failure to thrive CFTR thick mucus nasal polyps chronic lung infections",
+      "expected_disease": "Cystic fibrosis",
+      "orpha_code": "586",
+      "category": "biochemical_markers",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "angiomyolipoma ash leaf spots subependymal nodules",
+      "expected_disease": "Tuberous sclerosis",
+      "orpha_code": "805",
+      "category": "name_aliases",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "difficulty swallowing",
+      "expected_disease": "Myasthenia gravis",
+      "orpha_code": "589",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "UBE3A developmental delay hand flapping",
+      "expected_disease": "Angelman syndrome",
+      "orpha_code": "72",
+      "category": "classic_symptoms",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "heart enlargement exercise intolerance",
+      "expected_disease": "Pompe disease",
+      "orpha_code": "2075",
+      "category": "name_aliases",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "both sexes childhood cognitive impairment",
+      "expected_disease": "Williams syndrome",
+      "orpha_code": "868",
+      "category": "name_aliases",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "infantile onset happy demeanor",
+      "expected_disease": "Angelman syndrome",
+      "orpha_code": "72",
+      "category": "onset_terms",
+      "query_type": "onset",
+      "difficulty": "medium"
+    },
+    {
+      "query": "cafe-au-lait Lisch nodules learning difficulties",
+      "expected_disease": "Neurofibromatosis type 1",
+      "orpha_code": "636",
+      "category": "name_aliases",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "double vision",
+      "expected_disease": "Myasthenia gravis",
+      "orpha_code": "589",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "boys childhood neuropathic pain",
+      "expected_disease": "Fabry disease",
+      "orpha_code": "324",
+      "category": "name_aliases",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "aortic root dilation, arachnodactyly, tall stature, stretch marks, scoliosis",
+      "expected_disease": "Marfan syndrome",
+      "orpha_code": "558",
+      "category": "biochemical_markers",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "cardiomegaly",
+      "expected_disease": "Pompe disease",
+      "orpha_code": "2075",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "elfin face cognitive impairment",
+      "expected_disease": "Williams syndrome",
+      "orpha_code": "868",
+      "category": "name_aliases",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "CAG repeat dysarthria chorea",
+      "expected_disease": "Huntington disease",
+      "orpha_code": "399",
+      "category": "biochemical_markers",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "autosomal dominant dysphagia",
+      "expected_disease": "Huntington disease",
+      "orpha_code": "399",
+      "category": "inheritance_terms",
+      "query_type": "inheritance",
+      "difficulty": "medium"
+    },
+    {
+      "query": "EDS chronic pain joint hypermobility",
+      "expected_disease": "Ehlers-Danlos syndrome",
+      "orpha_code": "98261",
+      "category": "name_aliases",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "GH deficiency hypogonadism small hands and feet",
+      "expected_disease": "Prader-Willi syndrome",
+      "orpha_code": "739",
+      "category": "gender_specific",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "eye lens ectopia lentis",
+      "expected_disease": "Marfan syndrome",
+      "orpha_code": "558",
+      "category": "biochemical_markers",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "dementia, behavioral changes, chorea, irritability, depression",
+      "expected_disease": "Huntington disease",
+      "orpha_code": "399",
+      "category": "biochemical_markers",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "both sexes neonatal onset hypogonadism",
+      "expected_disease": "Prader-Willi syndrome",
+      "orpha_code": "739",
+      "category": "gender_specific",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "can't get up from floor muscle weakness boys",
+      "expected_disease": "Duchenne muscular dystrophy",
+      "orpha_code": "98896",
+      "category": "classic_symptoms",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "glycogen storage, muscle weakness, hypotonia, respiratory failure, acid alpha-glucosidase",
+      "expected_disease": "Pompe disease",
+      "orpha_code": "2075",
+      "category": "name_aliases",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "acid alpha-glucosidase",
+      "expected_disease": "Pompe disease",
+      "orpha_code": "2075",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "happy demeanor",
+      "expected_disease": "Angelman syndrome",
+      "orpha_code": "72",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "cafe spots Lisch nodules",
+      "expected_disease": "Neurofibromatosis type 1",
+      "orpha_code": "636",
+      "category": "name_aliases",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "girls autism features",
+      "expected_disease": "Rett syndrome",
+      "orpha_code": "778",
+      "category": "gender_filtering",
+      "query_type": "gender_filter",
+      "difficulty": "medium"
+    },
+    {
+      "query": "liver disease",
+      "expected_disease": "Wilson disease",
+      "orpha_code": "905",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "both sexes childhood skin hyperextensibility",
+      "expected_disease": "Ehlers-Danlos syndrome",
+      "orpha_code": "98261",
+      "category": "name_aliases",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "boys cardiomyopathy",
+      "expected_disease": "Duchenne muscular dystrophy",
+      "orpha_code": "98896",
+      "category": "gender_filtering",
+      "query_type": "gender_filter",
+      "difficulty": "medium"
+    },
+    {
+      "query": "antibodies diplopia double vision",
+      "expected_disease": "Myasthenia gravis",
+      "orpha_code": "589",
+      "category": "classic_symptoms",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "striatal degeneration",
+      "expected_disease": "Huntington disease",
+      "orpha_code": "399",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "tall individuals adult stretch marks",
+      "expected_disease": "Marfan syndrome",
+      "orpha_code": "558",
+      "category": "biochemical_markers",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "hyperphenylalaninemia microcephaly light hair",
+      "expected_disease": "Phenylketonuria",
+      "orpha_code": "716",
+      "category": "biochemical_markers",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "both sexes neonatal nasal polyps",
+      "expected_disease": "Cystic fibrosis",
+      "orpha_code": "586",
+      "category": "biochemical_markers",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "mousy odor seizures",
+      "expected_disease": "Phenylketonuria",
+      "orpha_code": "716",
+      "category": "biochemical_markers",
+      "query_type": "colloquial",
+      "difficulty": "hard"
+    },
+    {
+      "query": "males childhood social anxiety",
+      "expected_disease": "Fragile X syndrome",
+      "orpha_code": "908",
+      "category": "name_aliases",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "GLA GL3 accumulation cardiomyopathy",
+      "expected_disease": "Fabry disease",
+      "orpha_code": "324",
+      "category": "name_aliases",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "hypogonadism, speech delay, learning difficulties, behavioral problems, osteoporosis",
+      "expected_disease": "Klinefelter syndrome",
+      "orpha_code": "10",
+      "category": "gender_specific",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "male only osteoporosis",
+      "expected_disease": "Klinefelter syndrome",
+      "orpha_code": "10",
+      "category": "gender_filtering",
+      "query_type": "gender_filter",
+      "difficulty": "medium"
+    },
+    {
+      "query": "copper rings in eyes personality changes",
+      "expected_disease": "Wilson disease",
+      "orpha_code": "905",
+      "category": "classic_symptoms",
+      "query_type": "biochemical",
+      "difficulty": "easy"
+    },
+    {
+      "query": "copper accumulation",
+      "expected_disease": "Wilson disease",
+      "orpha_code": "905",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "thick phlegm thick mucus",
+      "expected_disease": "Cystic fibrosis",
+      "orpha_code": "586",
+      "category": "biochemical_markers",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "personality changes",
+      "expected_disease": "Wilson disease",
+      "orpha_code": "905",
+      "category": "vague_single_symptom",
+      "query_type": "single_symptom",
+      "difficulty": "hard"
+    },
+    {
+      "query": "jerky movements striatal degeneration",
+      "expected_disease": "Huntington disease",
+      "orpha_code": "399",
+      "category": "biochemical_markers",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "stretchy skin fragile skin",
+      "expected_disease": "Ehlers-Danlos syndrome",
+      "orpha_code": "98261",
+      "category": "name_aliases",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "autosomal recessive salty sweat",
+      "expected_disease": "Cystic fibrosis",
+      "orpha_code": "586",
+      "category": "inheritance_terms",
+      "query_type": "inheritance",
+      "difficulty": "medium"
+    },
+    {
+      "query": "autosomal recessive copper accumulation",
+      "expected_disease": "Wilson disease",
+      "orpha_code": "905",
+      "category": "inheritance_terms",
+      "query_type": "inheritance",
+      "difficulty": "medium"
+    },
+    {
+      "query": "infants infantile exercise intolerance",
+      "expected_disease": "Pompe disease",
+      "orpha_code": "2075",
+      "category": "name_aliases",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "kidney tumors facial angiofibroma",
+      "expected_disease": "Tuberous sclerosis",
+      "orpha_code": "805",
+      "category": "name_aliases",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "muscle wasting scoliosis progressive muscle weakness cardiomyopathy Gowers sign",
+      "expected_disease": "Duchenne muscular dystrophy",
+      "orpha_code": "98896",
+      "category": "classic_symptoms",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "boys early childhood seizures",
+      "expected_disease": "Angelman syndrome",
+      "orpha_code": "72",
+      "category": "classic_symptoms",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    },
+    {
+      "query": "enlarged spleen GBA deficiency",
+      "expected_disease": "Gaucher disease",
+      "orpha_code": "355",
+      "category": "name_aliases",
+      "query_type": "colloquial",
+      "difficulty": "medium"
+    },
+    {
+      "query": "eczema, musty odor, fair skin, hypopigmentation, intellectual disability",
+      "expected_disease": "Phenylketonuria",
+      "orpha_code": "716",
+      "category": "biochemical_markers",
+      "query_type": "symptom_based",
+      "difficulty": "medium"
+    },
+    {
+      "query": "boys adult learning difficulties",
+      "expected_disease": "Klinefelter syndrome",
+      "orpha_code": "10",
+      "category": "gender_specific",
+      "query_type": "gender_context",
+      "difficulty": "medium"
+    }
+  ]
+}

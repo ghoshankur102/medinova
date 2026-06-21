@@ -1,0 +1,29 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment variables
+.env
+.env.local
+
+# Generated data files
+Kimi_hackathon/data/*.pkl
+Kimi_hackathon/data/*.bin
+Kimi_hackathon/data/*.xml
+Kimi_hackathon/data/hp.obo
+
+# Evaluation results
+Kimi_hackathon/results/
+Kimi_hackathon/evaluation_output/
+
+# NIH images
+Kimi_hackathon/nih_chest_xray/images/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
