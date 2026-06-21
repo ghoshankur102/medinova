@@ -1,27 +1,61 @@
 #!/usr/bin/env python3
 """
 app.py — MediNova Streamlit App v4
-Rare disease diagnosis support with hybrid RAG + medical image analysis.
-"""
-
-#!/usr/bin/env python3
-"""
-app.py — MediNova Streamlit App v4
-Rare disease diagnosis support with hybrid RAG + medical image analysis.
 """
 
 import os
 import sys
-import io
-import json
+import subprocess
 import time
-import pickle
 import streamlit as st
 from PIL import Image
 
 # ── Add src folder to Python path ─────────────────────────────────────────
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
+# ── Ensure index exists (auto-build on first run) ────────────────────────
+def ensure_index_exists():
+    """Check if index exists, if not build it automatically."""
+    index_path = "data/faiss_index_medcpt_v4.bin"
+    meta_path = "data/faiss_meta_medcpt_v4.pkl"
+    
+    # Create data directory if it doesn't exist
+    os.makedirs("data", exist_ok=True)
+    
+    if os.path.exists(index_path) and os.path.exists(meta_path):
+        return True
+    
+    st.warning("⚠️ Index not found. Building now (this may take 5-10 minutes)...")
+    st.info("📌 This is a one-time setup. Please wait...")
+    
+    # Build the index
+    with st.spinner("🔨 Building FAISS index. Please wait..."):
+        # Get the absolute path to the project root
+        project_root = os.path.dirname(os.path.abspath(__file__))
+        build_script = os.path.join(project_root, "src", "build_index_v4.py")
+        
+        # Run the build script
+        result = subprocess.run(
+            [sys.executable, build_script],
+            capture_output=True,
+            text=True,
+            cwd=project_root
+        )
+        
+        # Check if successful
+        if result.returncode == 0:
+            st.success("✅ Index built successfully!")
+            time.sleep(2)
+            st.rerun()
+            return True
+        else:
+            st.error(f"❌ Failed to build index. Error: {result.stderr}")
+            st.error("Please try again or contact support.")
+            return False
+
+# ── Run the check ─────────────────────────────────────────────────────────
+if not ensure_index_exists():
+    st.stop()
 # ── Page config ───────────────────────────────────────────────────────────────
 
 # ── Page config ───────────────────────────────────────────────────────────────
