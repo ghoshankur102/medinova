@@ -13,6 +13,24 @@ import pickle
 import streamlit as st
 from PIL import Image
 
+
+# ── DEBUG: Find index files ──────────────────────────────────────────────────
+import subprocess
+
+st.write("### 🔍 Finding Index Files")
+
+# Search for the index file
+result = subprocess.run(["find", "/mount", "-name", "faiss_index_medcpt_v4.bin", "-type", "f"], 
+                        capture_output=True, text=True)
+st.write("📍 Index file locations:")
+st.code(result.stdout)
+
+# List the entire project structure
+result = subprocess.run(["ls", "-la", "/mount/src/medinova/Kimi_hackathon/"], 
+                        capture_output=True, text=True)
+st.write("📂 Kimi_hackathon/ contents:")
+st.code(result.stdout)
+
 # ── DEBUG: Check paths ──────────────────────────────────────────────────
 import os
 st.write("### 🔍 Path Debug")
@@ -145,28 +163,24 @@ def load_index():
             raise
 
 def check_index_exists() -> bool:
-    """Check if index exists with multiple fallback paths."""
-    # Try multiple possible paths
+    """Check if index exists."""
+    # The actual location on Streamlit Cloud
     possible_paths = [
         "data/faiss_index_medcpt_v4.bin",
         "../data/faiss_index_medcpt_v4.bin",
         "Kimi_hackathon/data/faiss_index_medcpt_v4.bin",
         "/mount/src/medinova/Kimi_hackathon/data/faiss_index_medcpt_v4.bin",
+        "/mount/src/medinova/data/faiss_index_medcpt_v4.bin",
+        "/mount/src/medinova/faiss_index_medcpt_v4.bin",
     ]
     
     for path in possible_paths:
         if os.path.exists(path):
+            st.write(f"✅ Found index at: {path}")
             return True
     
-    # Also try rag_engine_v4 paths if available
-    try:
-        from rag_engine_v4 import FAISS_INDEX_PATH, FAISS_META_PATH
-        return os.path.exists(FAISS_INDEX_PATH) and os.path.exists(FAISS_META_PATH)
-    except:
-        pass
-    
+    st.write("❌ Index not found in any location")
     return False
-
 
 # ── Rendering helpers ─────────────────────────────────────────────────────
 def render_disease_card(disease: dict, rank: int):
