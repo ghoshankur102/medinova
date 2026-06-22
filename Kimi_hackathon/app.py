@@ -13,48 +13,6 @@ import pickle
 import streamlit as st
 from PIL import Image
 
-
-# ── DEBUG: Find index files ──────────────────────────────────────────────────
-import subprocess
-
-st.write("### 🔍 Finding Index Files")
-
-# Search for the index file
-result = subprocess.run(["find", "/mount", "-name", "faiss_index_medcpt_v4.bin", "-type", "f"], 
-                        capture_output=True, text=True)
-st.write("📍 Index file locations:")
-st.code(result.stdout)
-
-# List the entire project structure
-result = subprocess.run(["ls", "-la", "/mount/src/medinova/Kimi_hackathon/"], 
-                        capture_output=True, text=True)
-st.write("📂 Kimi_hackathon/ contents:")
-st.code(result.stdout)
-
-# ── DEBUG: Check paths ──────────────────────────────────────────────────
-import os
-st.write("### 🔍 Path Debug")
-
-# Check current directory
-st.write(f"Current directory: {os.getcwd()}")
-
-# Check if data folder exists
-st.write(f"data/ exists: {os.path.exists('data')}")
-
-# List files in data/
-if os.path.exists("data"):
-    st.write(f"Files in data/: {os.listdir('data')}")
-
-# Check rag_engine_v4 paths
-try:
-    from rag_engine_v4 import FAISS_INDEX_PATH, FAISS_META_PATH
-    st.write(f"FAISS_INDEX_PATH: {FAISS_INDEX_PATH}")
-    st.write(f"FAISS_INDEX_PATH exists: {os.path.exists(FAISS_INDEX_PATH)}")
-    st.write(f"FAISS_META_PATH: {FAISS_META_PATH}")
-    st.write(f"FAISS_META_PATH exists: {os.path.exists(FAISS_META_PATH)}")
-except Exception as e:
-    st.write(f"Error importing from rag_engine_v4: {e}")
-
 # ── Add src folder to Python path ─────────────────────────────────────────
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
@@ -143,44 +101,18 @@ st.markdown("""
 
 # ── Index loading (cached) ─────────────────────────────────────────────────
 @st.cache_resource(show_spinner=False)
-
-@st.cache_resource(show_spinner=False)
 def load_index():
-    """Load index with fallback paths."""
-    try:
-        from rag_engine_v4 import load_faiss_index
-        return load_faiss_index()
-    except Exception as e:
-        st.error(f"Error loading index: {e}")
-        # Try direct import
-        try:
-            import sys
-            sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
-            from rag_engine_v4 import load_faiss_index
-            return load_faiss_index()
-        except Exception as e2:
-            st.error(f"Fallback error: {e2}")
-            raise
+    """Load index from rag_engine_v4."""
+    from rag_engine_v4 import load_faiss_index
+    return load_faiss_index()
+
 
 def check_index_exists() -> bool:
     """Check if index exists."""
-    # The actual location on Streamlit Cloud
-    possible_paths = [
-        "data/faiss_index_medcpt_v4.bin",
-        "../data/faiss_index_medcpt_v4.bin",
-        "Kimi_hackathon/data/faiss_index_medcpt_v4.bin",
-        "/mount/src/medinova/Kimi_hackathon/data/faiss_index_medcpt_v4.bin",
-        "/mount/src/medinova/data/faiss_index_medcpt_v4.bin",
-        "/mount/src/medinova/faiss_index_medcpt_v4.bin",
-    ]
-    
-    for path in possible_paths:
-        if os.path.exists(path):
-            st.write(f"✅ Found index at: {path}")
-            return True
-    
-    st.write("❌ Index not found in any location")
-    return False
+    index_path = "Kimi_hackathon/data/faiss_index_medcpt_v4.bin"
+    meta_path = "Kimi_hackathon/data/faiss_meta_medcpt_v4.pkl"
+    return os.path.exists(index_path) and os.path.exists(meta_path)
+
 
 # ── Rendering helpers ─────────────────────────────────────────────────────
 def render_disease_card(disease: dict, rank: int):
@@ -264,17 +196,17 @@ with st.sidebar:
 
     st.divider()
     st.markdown("#### 📊 System Status")
-    if check_index_exists():
+    
+    index_path = "Kimi_hackathon/data/faiss_index_medcpt_v4.bin"
+    if os.path.exists(index_path):
         st.success("✅ Index ready")
         try:
-            from rag_engine_v4 import FAISS_INDEX_PATH
-            size_mb = os.path.getsize(FAISS_INDEX_PATH) / 1e6
+            size_mb = os.path.getsize(index_path) / 1e6
             st.caption(f"Index size: {size_mb:.1f} MB")
         except Exception:
             pass
     else:
         st.warning("⚠️ Index not found")
-        st.caption("Run: `python build_index_v4.py`")
 
     st.divider()
     st.markdown("""
@@ -453,7 +385,6 @@ with tab2:
         analyze_clicked = st.button("🩻 Analyze Image", type="primary", use_container_width=False)
 
         if analyze_clicked:
-            # Determine media type
             ext = uploaded_file.name.lower().split(".")[-1]
             media_type_map = {"jpg": "image/jpeg", "jpeg": "image/jpeg",
                               "png": "image/png", "webp": "image/webp"}
@@ -469,7 +400,6 @@ with tab2:
                     st.success("✅ Analysis complete!")
                     render_image_analysis(analysis, suggested)
 
-                    # Auto-search if enabled
                     if auto_search and suggested and check_index_exists():
                         auto_query = ", ".join(suggested[:6])
                         st.markdown("---")
@@ -491,17 +421,12 @@ with tab2:
                             st.info("No disease matches found from image findings.")
 
                 except json.JSONDecodeError as e:
-                    st.error(f"JSON parse error from Claude: {e}")
-                    st.caption("Claude returned non-JSON. Check API key and try again.")
+                    st.error(f"JSON parse error: {e}")
                 except Exception as e:
                     st.error(f"Image analysis error: {e}")
-                    if "ANTHROPIC_API_KEY" in str(e) or "api_key" in str(e).lower():
-                        st.warning("Set ANTHROPIC_API_KEY environment variable to enable image analysis.")
-                    else:
-                        st.exception(e)
+                    st.exception(e)
 
     else:
-        # Demo mode placeholder
         st.markdown("""
         <div style="
             background: #1e2235;
