@@ -13,6 +13,30 @@ import pickle
 import streamlit as st
 from PIL import Image
 
+# ── DEBUG: Check paths ──────────────────────────────────────────────────
+import os
+st.write("### 🔍 Path Debug")
+
+# Check current directory
+st.write(f"Current directory: {os.getcwd()}")
+
+# Check if data folder exists
+st.write(f"data/ exists: {os.path.exists('data')}")
+
+# List files in data/
+if os.path.exists("data"):
+    st.write(f"Files in data/: {os.listdir('data')}")
+
+# Check rag_engine_v4 paths
+try:
+    from rag_engine_v4 import FAISS_INDEX_PATH, FAISS_META_PATH
+    st.write(f"FAISS_INDEX_PATH: {FAISS_INDEX_PATH}")
+    st.write(f"FAISS_INDEX_PATH exists: {os.path.exists(FAISS_INDEX_PATH)}")
+    st.write(f"FAISS_META_PATH: {FAISS_META_PATH}")
+    st.write(f"FAISS_META_PATH exists: {os.path.exists(FAISS_META_PATH)}")
+except Exception as e:
+    st.write(f"Error importing from rag_engine_v4: {e}")
+
 # ── Add src folder to Python path ─────────────────────────────────────────
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
@@ -101,15 +125,47 @@ st.markdown("""
 
 # ── Index loading (cached) ─────────────────────────────────────────────────
 @st.cache_resource(show_spinner=False)
-def load_index():
-    from rag_engine_v4 import load_faiss_index
-    return load_faiss_index()
 
+@st.cache_resource(show_spinner=False)
+def load_index():
+    """Load index with fallback paths."""
+    try:
+        from rag_engine_v4 import load_faiss_index
+        return load_faiss_index()
+    except Exception as e:
+        st.error(f"Error loading index: {e}")
+        # Try direct import
+        try:
+            import sys
+            sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+            from rag_engine_v4 import load_faiss_index
+            return load_faiss_index()
+        except Exception as e2:
+            st.error(f"Fallback error: {e2}")
+            raise
 
 def check_index_exists() -> bool:
-    """Check if index exists using rag_engine_v4 paths."""
-    from rag_engine_v4 import FAISS_INDEX_PATH, FAISS_META_PATH
-    return os.path.exists(FAISS_INDEX_PATH) and os.path.exists(FAISS_META_PATH)
+    """Check if index exists with multiple fallback paths."""
+    # Try multiple possible paths
+    possible_paths = [
+        "data/faiss_index_medcpt_v4.bin",
+        "../data/faiss_index_medcpt_v4.bin",
+        "Kimi_hackathon/data/faiss_index_medcpt_v4.bin",
+        "/mount/src/medinova/Kimi_hackathon/data/faiss_index_medcpt_v4.bin",
+    ]
+    
+    for path in possible_paths:
+        if os.path.exists(path):
+            return True
+    
+    # Also try rag_engine_v4 paths if available
+    try:
+        from rag_engine_v4 import FAISS_INDEX_PATH, FAISS_META_PATH
+        return os.path.exists(FAISS_INDEX_PATH) and os.path.exists(FAISS_META_PATH)
+    except:
+        pass
+    
+    return False
 
 
 # ── Rendering helpers ─────────────────────────────────────────────────────
